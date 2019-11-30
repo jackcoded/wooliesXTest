@@ -9,6 +9,6 @@ namespace wooliesXTest.Models
     {
         public string Name { get; set; }
         public decimal Price { get; set; }
-        public decimal Quantitiy { get; set; }
+        public decimal Quantity { get; set; }
     }
 }

@@ -26,7 +26,6 @@ namespace wooliesXTest.Services
        public async Task<List<Product>> SortProducts(string sortOptions)
         {
             List<Product> productList = await GetData<List<Product>>("products");
-            List<Order> recommendedList;
             List<Order> orderList = await GetData<List<Order>>("shopperHistory");
 
             if (String.Equals(sortOptions, "low", StringComparison.InvariantCultureIgnoreCase)) {
@@ -43,7 +42,22 @@ namespace wooliesXTest.Services
             }
             else if (String.Equals(sortOptions, "recommended", StringComparison.InvariantCultureIgnoreCase)) {
                 productList = orderList.Select(o => o.Products)
-                                       .SelectMany(p => p).ToList();
+                                       .SelectMany(p => p).ToList()
+                                       .Concat(productList.Select(p => { p.Quantity = 0; return p; }).ToList())
+                                       .GroupBy(p => p.Name)
+                                       .Select(g =>
+                                               new Product
+                                               {
+                                                   Name = g.First().Name,
+                                                   Price = g.First().Price,
+                                                   Quantity = g.Sum(p => p.Quantity)
+                                               })
+                                       .OrderByDescending(p => p.Quantity)
+                                       // filter list from productList
+                                       .Where(product => productList.Any(p => product.Name == p.Name))
+                                       // changes all quantity back to 0
+                                       .Select(p => { p.Quantity = 0; return p; })
+                                       .ToList(); 
             }
             return productList;
         }
