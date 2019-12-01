@@ -16,7 +16,7 @@ namespace wooliesXTest.Controllers
         [HttpGet("user")]
         public User Get()
         {
-            return new User { Name = "Jack", Token = Guid.NewGuid() };
+            return new User { Name = "Jack Chaw", Token = Guid.NewGuid() };
         }
     }
 }
