@@ -3,15 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+
 namespace wooliesXTest.Models
 {
-    public class Product
+    public class ProductQuantity
     {
-        [JsonProperty("name")]
+        [JsonProperty(PropertyName = "name")]
         public string Name { get; set; }
-        [JsonProperty("price")]
-        public decimal Price { get; set; }
-        [JsonProperty("quantity")]
+        [JsonProperty(PropertyName = "quantity")]
         public decimal Quantity { get; set; }
     }
 }
