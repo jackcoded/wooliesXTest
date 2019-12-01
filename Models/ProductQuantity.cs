@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
-
 namespace wooliesXTest.Models
 {
     public class ProductQuantity
@@ -11,6 +10,6 @@ namespace wooliesXTest.Models
         [JsonProperty(PropertyName = "name")]
         public string Name { get; set; }
         [JsonProperty(PropertyName = "quantity")]
-        public decimal Quantity { get; set; }
+        public int Quantity { get; set; }
     }
 }

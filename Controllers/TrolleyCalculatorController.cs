@@ -4,43 +4,26 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-
+using wooliesXTest.Services;
+using wooliesXTest.Models;
 namespace wooliesXTest.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/trolleyTotal")]
     [ApiController]
     public class TrolleyCalculatorController : ControllerBase
     {
-        // GET: api/TrolleyCalculator
-        [HttpGet]
-        public IEnumerable<string> Get()
+        private readonly ITrolleyCalculatorServices _trolleyCalculatorServices;
+        public TrolleyCalculatorController(ITrolleyCalculatorServices trolleyCalculatorServices)
         {
-            return new string[] { "value1", "value2" };
+            _trolleyCalculatorServices = trolleyCalculatorServices;
         }
-
-        // GET: api/TrolleyCalculator/5
-        [HttpGet("{id}", Name = "Get")]
-        public string Get(int id)
-        {
-            return "value";
-        }
-
-        // POST: api/TrolleyCalculator
+        // POST: api/trolleyTotal
         [HttpPost]
-        public void Post([FromBody] string value)
+        public async Task<IActionResult> Post([FromBody] Trolley request)
         {
+           var total = await _trolleyCalculatorServices.GetTotal(request);
+           return Ok(total);
         }
 
-        // PUT: api/TrolleyCalculator/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
-        // DELETE: api/ApiWithActions/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
     }
 }

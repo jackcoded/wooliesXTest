@@ -27,6 +27,8 @@ namespace wooliesXTest
         {
             services.AddControllers();
             services.AddHttpClient<IProductsService, ProductsService>();
+            services.AddHttpClient<ITrolleyCalculatorServices, TrolleyCalculatorServices>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

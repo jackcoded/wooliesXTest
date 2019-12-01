@@ -10,6 +10,6 @@ namespace wooliesXTest.Models
         [JsonProperty("quantities")]
         public List<ProductQuantity> Quantities { get; set; }
         [JsonProperty("total")]
-        public decimal Total { get; set; }
+        public int Total { get; set; }
     }
 }
